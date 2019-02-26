@@ -29,3 +29,11 @@ def no_english_and_non_english():
 # part 4
 def filter_data(data, mask):
     return data[mask]
+
+# part 5
+def accumulated_population_of_xval(data, xkey, xval):
+    res = data[data[:,xkey] == xval][:,-1].cumsum()
+        
+    return res
+
+# part 6
