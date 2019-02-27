@@ -9,7 +9,8 @@ neighb = {1: 'Indre By', 2: 'Østerbro', 3: 'Nørrebro', 4: 'Vesterbro/Kgs. Engh
 # part 2
 def get_data():
     filename = './befkbhalderstatkode.csv'
-
+    
+    #Load data from a text file. Each line past the first skip_header lines is split at the delimiter character
     bef_stats_df = np.genfromtxt(filename, delimiter=',', dtype=np.uint, skip_header=1)
     
     return bef_stats_df
@@ -18,9 +19,12 @@ def get_data():
 def no_english_and_non_english():
     data = get_data()
     
+    # for each country_code check if it is a navtive english speaking country
     eng_mask = [i in native_english_speakers for i in data[:,3]]
     
+    # sum data from all native english speaking countries
     no_english = np.array([data[(data[:,0] == n) & eng_mask][:,-1].sum() for n in list(set(data[:,0]))])
+    # sum all data
     total = np.array([data[data[:,0] == n][:,-1].sum() for n in list(set(data[:,0]))])
     no_non_english = total - no_english
     
@@ -31,16 +35,19 @@ def filter_data(data, mask):
     return data[mask]
 
 # part 5
-def accumulated_population_of_xval(data, xkey):    
+def accumulated_population_of_xval(data, xkey):
+    # sum data for same xkey
     data_dict = {n:data[data[:,xkey] == n][:,-1].sum() for n in list(set(data[:,xkey]))}
     
     keys = []
     acc_sums = []
     acc_sum = 0
     
+    # go through the data sorted by key
     for k,v in sorted(data_dict.items(),key=lambda x:x[0]):
         acc_sum += v
         keys.append(k)
         acc_sums.append(acc_sum)
     
+    # returns a 2darray with x = key and y = accumulated sum
     return np.array(keys[:]+acc_sums[:]).reshape(2,len(keys))
