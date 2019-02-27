@@ -31,14 +31,14 @@ def filter_data(data, mask):
     return data[mask]
 
 # part 5
-def accumulated_population_of_xval(data, xkey):
+def accumulated_population_of_xval(data, xkey):    
     data_dict = {n:data[data[:,xkey] == n][:,-1].sum() for n in list(set(data[:,xkey]))}
     
     keys = []
     acc_sums = []
     acc_sum = 0
     
-    for k,v in data_dict.items():
+    for k,v in sorted(data_dict.items(),key=lambda x:x[0]):
         acc_sum += v
         keys.append(k)
         acc_sums.append(acc_sum)
