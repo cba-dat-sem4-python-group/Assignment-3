@@ -1,6 +1,8 @@
 # Assignment 3: numpy
 This assignment is about slicing and .
 
+Link to: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/cba-dat-sem4-python-group/Assignment-3/master?filepath=Assignment-3.ipynb)
+
 ## How to hand in
 The assignment is expected to be published on GitHub, but the actual hand-in is on peergrade and should contain only a link to a MyBinder. Remember her to use the link provided when first registering your notebook with mybinder (not the url taken from your browsers adress field). See the notebook 12-Assignments for more information.
 
