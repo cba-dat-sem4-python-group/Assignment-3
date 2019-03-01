@@ -40,15 +40,7 @@ def accumulated_population_of_xval(data, xkey):
     # sum data for same xkey
     data_dict = {n:data[data[:,xkey] == n][:,-1].sum() for n in list(set(data[:,xkey]))}
     
-    keys = []
-    acc_sums = []
-    acc_sum = 0
+    sorted_data = sorted(list(data_dict.items()),key=lambda x:x[0])
+    data2d = np.array(sorted_data)
     
-    # go through the data sorted by key
-    for k,v in sorted(data_dict.items(),key=lambda x:x[0]):
-        acc_sum += v
-        keys.append(k)
-        acc_sums.append(acc_sum)
-    
-    # returns a 2darray with x = key and y = accumulated sum
-    return np.array(keys[:]+acc_sums[:]).reshape(2,len(keys))
+    return data2d
